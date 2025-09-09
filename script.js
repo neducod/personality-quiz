@@ -44,12 +44,28 @@ const questions = [
         {text: "Regex tricks", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
+    {question: "What’s your favorite coding quote?", 
     answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
+        {text: "Design is intelligence made visible", type: "A"},
+        {text: "Programs must be written for people to read", type: "B"},
+        {text: "The best code is no code at all", type: "C"},
+        {text: "It’s not a bug, it’s a feature!", type: "D"},
+            ]
+    },
+    {question: "If coding were a game, what’s your role?", 
+    answers: [
+        {text: "The designer creating beautiful maps", type: "A"},
+        {text: "The strategist planning the perfect move", type: "B"},
+        {text: "The player who does it all", type: "C"},
+        {text: "The fixer who patches every glitch", type: "D"},
+            ]
+    },
+    {question: "Which project sounds most fun?", 
+    answers: [
+        {text: "A stunning animated portfolio", type: "A"},
+        {text: "An AI chatbot", type: "B"},
+        {text: "A social media app", type: "C"},
+        {text: "A bug-fixing challenge", type: "D"},
             ]
     },
     {question: "Your favorite part of a website is...", 
@@ -60,79 +76,62 @@ const questions = [
         {text: "That everything runs without errors", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
+    {question: "What’s your debugging style?", 
     answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
+        {text: "Make it look better and it’ll work", type: "A"},
+        {text: "Trace every line logically", type: "B"},
+        {text: "Fix as I build", type: "C"},
+        {text: "Destroy the bug at all costs.", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
+    {question: "How do you feel about regex?", 
     answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
+        {text: "Ugh, too technical for me", type: "A"},
+        {text: "Regex is power", type: "B"},
+        {text: "I’ll use it if I need to", type: "C"},
+        {text: "I breathe regex.", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
+    {question: "Your dream coding setup includes…", 
     answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
+        {text: "A big colorful monitor and fancy keyboard", type: "A"},
+        {text: "A dark terminal and blazing fast laptop", type: "B"},
+        {text: "A balance of everything", type: "C"},
+        {text: "Debugging tools everywhere ", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
+    {question: "Your go-to coding snack?", 
     answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
+        {text: "Aesthetic coffee & croissant", type: "A"},
+        {text: "Energy drink", type: "B"},
+        {text: "Anything quick and filling like eggs", type: "C"},
+        {text: "Nothing, I’m deep in the code", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
+    {question: "Which word best describes your coding style?", 
     answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
+        {text: "Artistic", type: "A"},
+        {text: "Analytical", type: "B"},
+        {text: "Balanced", type: "C"},
+        {text: "Persistent", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
+    {question: "If coding was a superhero power, yours would be…", 
     answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
+        {text: "UI Vision", type: "A"},
+        {text: "Logic Beam", type: "B"},
+        {text: "Full-Stack Force", type: "C"},
+        {text: "Bug Slayer", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
+    {question: "How do you feel when you finish a project?", 
     answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
+        {text: "It looks amazing", type: "A"},
+        {text: "The logic is solid", type: "B"},
+        {text: "Everything works together perfectly.", type: "C"},
+        {text: "No bugs left. Victory!", type: "D"},
             ]
     },
-    {question: "Your favorite part of a website is...", 
-    answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
-            ]
-    },
-    {question: "Your favorite part of a website is...", 
-    answers: [
-        {text: "The visuals and animations", type: "A"},
-        {text: "The backend magic", type: "B"},
-        {text: "How the front and back work together", type: "C"},
-        {text: "That everything runs without errors", type: "D"},
-            ]
-    },
-
 ]
 
 const score = {A: 0, B: 0, C: 0, D: 0},
