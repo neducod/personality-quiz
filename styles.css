@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.app{
+    width: 400px;
+    height: 300px;
+    background-color: rgb(243, 242, 212);
+    border: none;
+    margin: 200px auto;
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    border-radius: 12px;
+}
+button{
+    width: 200px;
+    height: 25px;
+    background-color: aqua;
+}
+#answer-btns{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.buttons{
+    width: 250px;
+    height: 25px;
+    color: white;
+    margin-left: 10px;
+    background-color: rgb(44, 55, 55);
+}

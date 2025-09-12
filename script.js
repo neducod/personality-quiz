@@ -10,13 +10,18 @@
 
 // let questions;
 
+
+const questionElement = document.getElementById("question");
+const answerButton = document.getElementById("answer-btns");
+const nextButton = document.getElementById("next-btn");
+
 const questions = [
     {question: "What excites you the most about coding?", 
     answers: [
         {text: "Designing stunning interfaces", type: "A"},
-        {text: "Designing stunning interfaces", type: "B"},
-        {text: "Designing stunning interfaces", type: "C"},
-        {text: "Designing stunning interfaces", type: "D"},
+        {text: "Solving complex algorithms", type: "B"},
+        {text: "Building complete projects from scratch", type: "C"},
+        {text: "Debugging until everything is perfect", type: "D"},
         // {text: "Designing stunning interfaces",text: "Solving complex algorithms", text: "Building complete projects from scratch", text: "Debugging until everything is perfect"}
             ]
     },
@@ -131,20 +136,131 @@ const questions = [
         {text: "Everything works together perfectly.", type: "C"},
         {text: "No bugs left. Victory!", type: "D"},
             ]
-    },
-]
+    }
+];
 
 const score = {A: 0, B: 0, C: 0, D: 0},
 
 userAnswers = [];
 
 
+// let currentQuestionIndex = 0;
 let currentQuestionIndex = 0;
-score[type]++
 
-showQuestion( questions[currentQuestionIndex] ){
-    
+
+function startQuiz(){
+    currentQuestionIndex = 0;
+    //score = 0;
+    //score = { A: 0, B: 0, C: 0, D: 0 };
+
+    score.A = 0;
+    score.B = 0;
+    score.C = 0;
+    score.D = 0;
+
+
+    //nextButton.innerHTML = "Next"
+    nextButton.style.display = "none";
+    showQuestion();
 }
+function showQuestion(){
+    answerButton.innerHTML = "";
+
+
+
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + " . " + currentQuestion.question;
+/*
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add("buttons");
+        // when clicked, store the type (A, B, C, D)
+        button.addEventListener("click", () => selectAnswer(answer.type));
+        answerButton.appendChild(button);
+    });
+*/
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add("buttons");
+
+        button.addEventListener("click", () => selectAnswer(answer, type));
+        answerButton.appendChild(button);
+    })
+}
+
+function selectAnswer(type) {
+    // add score for the selected type
+    score[type]++;
+
+    // store the answer (optional, in case you want review later)
+    userAnswers.push(type);
+/*
+    // disable all buttons so user can’t click again
+    const buttons = document.querySelectorAll("#answer-btns button");
+    buttons.forEach(btn => {
+        btn.disabled = true;
+    });
+
+    // show Next button
+    nextButton.style.display = "block";
+*/
+
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion(); // go to next
+        } else {
+            showResult(); // end quiz
+        }
+    }, 500); // 0.5s pause before moving on
+}
+
+nextButton.addEventListener("click", () => {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        showQuestion(); // still questions left
+        nextButton.style.display = "none"; // hide again until an answer is chosen
+    } else {
+        showResult(); // quiz finished
+    }
+});
+
+
+function showResult() {
+    // clear answer buttons
+    answerButton.innerHTML = "";
+
+    // hide next button
+    nextButton.style.display = "none";
+
+    // find the highest score personality
+    let highestType = Object.keys(score).reduce((a, b) => 
+        score[a] > score[b] ? a : b
+    );
+
+    // show final result
+    questionElement.innerHTML = `🎉 You are type ${highestType}!`;
+
+    // (Optional) Add descriptions for each type
+    // e.g.
+    // if (highestType === "A") questionElement.innerHTML += "<br>You're a creative front-end artist!";
+}
+
+
+
+
+//score[type]++
+
+
+
+
+
+
+// let score = 0;
+
 
 
 /*
