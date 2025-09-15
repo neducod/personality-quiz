@@ -15,6 +15,7 @@ const questionElement = document.getElementById("question");
 const answerButton = document.getElementById("answer-btns");
 const nextButton = document.getElementById("next-btn");
 
+console.log(nextButton)
 const questions = [
     {question: "What excites you the most about coding?", 
     answers: [
@@ -149,20 +150,31 @@ let currentQuestionIndex = 0;
 
 
 function startQuiz(){
-    currentQuestionIndex = 0;
-    //score = 0;
+    // currentQuestionIndex = 0;
     //score = { A: 0, B: 0, C: 0, D: 0 };
 
+    // score.A = 0;
+    // score.B = 0;
+    // score.C = 0;
+    // score.D = 0;
+
+
+    //nextButton.innerHTML = "Next"
+
+
+    // nextButton.style.display = "none";
+
+    currentQuestionIndex = 0;
     score.A = 0;
     score.B = 0;
     score.C = 0;
     score.D = 0;
-
-
-    //nextButton.innerHTML = "Next"
-    nextButton.style.display = "none";
+    nextButton.innerHTML = "Next"
     showQuestion();
 }
+
+
+/*
 function showQuestion(){
     answerButton.innerHTML = "";
 
@@ -180,7 +192,10 @@ function showQuestion(){
         button.addEventListener("click", () => selectAnswer(answer.type));
         answerButton.appendChild(button);
     });
-*/
+*
+
+
+
     currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
         button.innerText = answer.text;
@@ -190,6 +205,38 @@ function showQuestion(){
         answerButton.appendChild(button);
     })
 }
+*/
+function showQuestion() {
+    // clear old answers
+    answerButton.innerHTML = "";
+
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add("buttons");
+
+        // when clicked → store answer type
+        button.addEventListener("click", () => {
+            score[answer.type]++;
+            userAnswers.push(answer.type);
+
+            // highlight selected button
+            const buttons = document.querySelectorAll("#answer-btns button");
+            buttons.forEach(btn => btn.classList.remove("clicked"));
+            button.classList.add("clicked");
+        });
+
+        answerButton.appendChild(button);
+    });
+
+    // Next button always visible
+    nextButton.style.display = "block";
+}
+
 
 function selectAnswer(type) {
     // add score for the selected type
@@ -197,57 +244,61 @@ function selectAnswer(type) {
 
     // store the answer (optional, in case you want review later)
     userAnswers.push(type);
-/*
-    // disable all buttons so user can’t click again
-    const buttons = document.querySelectorAll("#answer-btns button");
-    buttons.forEach(btn => {
-        btn.disabled = true;
-    });
-
-    // show Next button
-    nextButton.style.display = "block";
-*/
-
-    setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            showQuestion(); // go to next
-        } else {
-            showResult(); // end quiz
-        }
-    }, 500); // 0.5s pause before moving on
 }
 
+let answered = false;
+
+
 nextButton.addEventListener("click", () => {
+
+
+
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
-        showQuestion(); // still questions left
-        nextButton.style.display = "none"; // hide again until an answer is chosen
+        showQuestion();
+        // nextButton.style.display = "none"; 
     } else {
-        showResult(); // quiz finished
+        showResult(); 
     }
 });
 
 
-function showResult() {
-    // clear answer buttons
-    answerButton.innerHTML = "";
 
-    // hide next button
-    nextButton.style.display = "none";
 
-    // find the highest score personality
-    let highestType = Object.keys(score).reduce((a, b) => 
-        score[a] > score[b] ? a : b
-    );
+const results = {
+    A: "🎨 You’re a Creative Developer! You love designing stunning UIs and bringing ideas to life visually.",
+    B: "🧩 You’re a Problem Solver! You thrive on solving complex algorithms and logical challenges.",
+    C: "🚀 You’re a Builder! You enjoy starting projects from scratch and seeing them grow into something big.",
+    D: "🔧 You’re a Debugger! You’re patient and meticulous, fixing bugs until everything runs perfectly."
+};
 
-    // show final result
-    questionElement.innerHTML = `🎉 You are type ${highestType}!`;
 
-    // (Optional) Add descriptions for each type
-    // e.g.
-    // if (highestType === "A") questionElement.innerHTML += "<br>You're a creative front-end artist!";
+// function showResult() {
+//     // clear answer buttons
+//     answerButton.innerHTML = "";
+
+//     // hide next button
+//     nextButton.style.display = "none";
+
+//     // find the highest score personality
+//     let highestType = Object.keys(score).reduce((a, b) => 
+//         score[a] > score[b] ? a : b
+//     );
+
+//     // show final result
+//     questionElement.innerHTML = `🎉 You are type ${highestType}!`;
+
+// }
+
+function showResult(){
+    let finalType = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
+    questionElement.innerHTML = "Your Developer Personality";
+    answerButton.innerHTML = results[finalType]; 
+    nextButton.innerHTML = "Play Again";
+    nextButton.style.display = "block";
+    nextButton.addEventListener("click", startQuiz);
 }
+
 
 
 
@@ -271,3 +322,16 @@ One scores object
 One answers array (user’s choices)
 
 One result object (personalities) */
+
+
+
+/* form select answer
+ // disable all buttons so user can’t click again
+    const buttons = document.querySelectorAll("#answer-btns button");
+    buttons.forEach(btn => {
+        btn.disabled = true;
+    });
+
+    // show Next button
+    nextButton.style.display = "block";
+*/
