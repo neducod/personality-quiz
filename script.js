@@ -11,11 +11,13 @@
 // let questions;
 
 
+
+
+
 const questionElement = document.getElementById("question");
 const answerButton = document.getElementById("answer-btns");
 const nextButton = document.getElementById("next-btn");
 
-console.log(nextButton)
 const questions = [
     {question: "What excites you the most about coding?", 
     answers: [
@@ -139,61 +141,82 @@ const questions = [
     }
 ];
 
-// const score = {A: 0, B: 0, C: 0, D: 0},
+
+const results = {
+    A: "🎨 You’re a Creative Developer! You love designing stunning UIs and bringing ideas to life visually.",
+    B: "🧩 You’re a Problem Solver! You thrive on solving complex algorithms and logical challenges.",
+    C: "🚀 You’re a Builder! You enjoy starting projects from scratch and seeing them grow into something big.",
+    D: "🔧 You’re a Debugger! You’re patient and meticulous, fixing bugs until everything runs perfectly."
+};
+
+
+
+
 let score = { A: 0, B: 0, C: 0, D: 0 };
-userAnswers = [];
+// userAnswers = [];
+let selectedAnswer = null;
 let currentQuestionIndex = 0;
-let answered = false;
+// let answered = false;
+let introMode = true;
+
+
+function showIntro() {
+    // questionElement.innerHTML = "Developer's Personality Quiz";
+    questionElement = document.getElementById("head-h1");
+    // answerButton.innerHTML = "<p>Find out what kind of developer you are</p><p>This is only fictional, don't take anything personal</p>";
+    answerButton = document.getElementById("head-p");
+    nextButton = document.getElementById("next-btn")
+    // nextButton.innerHTML = "Next";
+    introMode = true;
+}
+
+
 
 
 
 function startQuiz(){
     currentQuestionIndex = 0;
     score = { A: 0, B: 0, C: 0, D: 0 };
-    answered = false;
-    nextButton.innerHTML = "Next";
-    nextButton.onclick = handleNext;
-    showQuestion();
+    // answered = false;
+    introMode = false;
+    selectedAnswer = null;
+    // nextButton.innerHTML = "Next";
+    // nextButton.onclick = handleNext;
+    // showQuestion();
 
-    // score.A = 0;
-    // score.B = 0;
-    // score.C = 0;
-    // score.D = 0;
+    nextButton.innerHTML = "Next";
+    showQuestion();
 }
 
-
-/*
-function showQuestion(){
+function showQuestion() {
     answerButton.innerHTML = "";
-
-
-
+    selectedAnswer = null;
+  
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + " . " + currentQuestion.question;
-/*
+    questionElement.innerHTML = `${questionNo}. ${currentQuestion.question}`;
+  
     currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerText = answer.text;
-        button.classList.add("buttons");
-        // when clicked, store the type (A, B, C, D)
-        button.addEventListener("click", () => selectAnswer(answer.type));
-        answerButton.appendChild(button);
+      const button = document.createElement("button");
+      button.innerText = answer.text;
+      button.classList.add("buttons");
+  
+      button.addEventListener("click", () => {
+        // mark selected
+        selectedAnswer = answer.type;
+  
+        // remove highlight from others
+        document.querySelectorAll("#answer-btns button").forEach(btn => {
+          btn.classList.remove("clicked");
+        });
+        button.classList.add("clicked");
+      });
+  
+      answerButton.appendChild(button);
     });
-*
-
-
-
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerText = answer.text;
-        button.classList.add("buttons");
-
-        button.addEventListener("click", () => selectAnswer(answer, type));
-        answerButton.appendChild(button);
-    })
 }
-*/
+
+
 //
 //
 /*
@@ -228,7 +251,10 @@ function showQuestion() {
     nextButton.style.display = "block";
 }
 */
-
+//
+//
+//
+/*
 function showQuestion() {
     answered = false;
     answerButton.innerHTML = "";
@@ -256,7 +282,11 @@ function showQuestion() {
         answerButton.appendChild(button);
     });
 }
-
+*/
+//
+//
+//
+/*
 function selectAnswer(type) {
     // add score for the selected type
     score[type]++;
@@ -273,16 +303,10 @@ nextButton.addEventListener("click", () => {
         showResult(); 
     }
 });
+*/
 
 
 
-
-const results = {
-    A: "🎨 You’re a Creative Developer! You love designing stunning UIs and bringing ideas to life visually.",
-    B: "🧩 You’re a Problem Solver! You thrive on solving complex algorithms and logical challenges.",
-    C: "🚀 You’re a Builder! You enjoy starting projects from scratch and seeing them grow into something big.",
-    D: "🔧 You’re a Debugger! You’re patient and meticulous, fixing bugs until everything runs perfectly."
-};
 /*
 function showResult(){
     let finalType = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
@@ -294,6 +318,10 @@ function showResult(){
 }
 */
 
+
+
+
+/*
 function showResult() {
     let finalType = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
 
@@ -301,61 +329,49 @@ function showResult() {
     answerButton.innerHTML = results[finalType]; 
 
     nextButton.innerHTML = "Play Again";
-    nextButton.onclick = startQuiz; // replace old handler
+    nextButton.onclick = startQuiz; 
 }
-
-
-
-
-
-
-
-
-
-
-// function showResult() {
-//     // clear answer buttons
-//     answerButton.innerHTML = "";
-
-//     // hide next button
-//     nextButton.style.display = "none";
-
-//     // find the highest score personality
-//     let highestType = Object.keys(score).reduce((a, b) => 
-//         score[a] > score[b] ? a : b
-//     );
-
-//     // show final result
-//     questionElement.innerHTML = `🎉 You are type ${highestType}!`;
-
-// }
-
-
-//score[type]++
-
-
-// let score = 0;
-
-
-
-/*
-One questions array (objects inside)
-
-One scores object
-
-One answers array (user’s choices)
-
-One result object (personalities) */
-
-
-
-/* form select answer
- // disable all buttons so user can’t click again
-    const buttons = document.querySelectorAll("#answer-btns button");
-    buttons.forEach(btn => {
-        btn.disabled = true;
-    });
-
-    // show Next button
-    nextButton.style.display = "block";
 */
+
+nextButton.onclick = () => {
+
+    if (introMode) {
+        // ✅ On intro, no validation
+        startQuiz();
+        return;
+    }
+
+
+    if (selectedAnswer === null) {
+      // vibrate + red border
+      document.querySelector(".quiz").classList.add("error");
+      setTimeout(() => {
+        document.querySelector(".quiz").classList.remove("error");
+      }, 500);
+      return; // stop here
+    }
+  
+    // update score
+    score[selectedAnswer]++;
+  
+    // go next or show result
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      showQuestion();
+    } else {
+      showResult();
+    }
+};
+
+
+function showResult() {
+    let finalType = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
+    questionElement.innerHTML = "Your Developer Personality";
+    answerButton.innerHTML = `<p>${results[finalType]}</p>`;
+    
+    nextButton.innerHTML = "Replay";
+    nextButton.onclick = startQuiz; // replace old click
+  }
+
+
+showIntro();
