@@ -25,7 +25,6 @@
     transition: all 0.3s ease;
 }
 .head{
-
   font-family: Montserrat, sans-serif;
   font-size: 14px;
   font-weight: 200;
@@ -86,3 +85,37 @@ button{
     75% { transform: translateX(-3px); }
     100% { transform: translateX(0); }
 }
+
+@media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+    .app{
+        /* max-width: 10px; */
+        max-width: 300px;
+        width: 100%;
+        padding: 2px;
+    }
+    .head{
+        font-size: 10px;
+        margin-bottom: 2px;
+    }
+    #head-h1{
+        font-size: 17px;
+    }
+    button{
+
+    }
+    #answe-btns{
+        margin-bottom: 1px;
+        gap: 10px;
+    }
+    .buttons{
+        width: 100%;
+        max-width: 240px;
+    }
+    #question{
+        font-size: 18px;
+        padding: 5px;
+    }
+  }
