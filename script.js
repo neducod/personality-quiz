@@ -23,7 +23,6 @@ const questions = [
         {text: "Solving complex algorithms", type: "B"},
         {text: "Building complete projects from scratch", type: "C"},
         {text: "Debugging until everything is perfect", type: "D"},
-        // {text: "Designing stunning interfaces",text: "Solving complex algorithms", text: "Building complete projects from scratch", text: "Debugging until everything is perfect"}
             ]
     },
     {question: "Your favorite part of a website is...", 
@@ -140,19 +139,26 @@ const questions = [
     }
 ];
 
-const score = {A: 0, B: 0, C: 0, D: 0},
+// const score = {A: 0, B: 0, C: 0, D: 0},
+let score = { A: 0, B: 0, C: 0, D: 0 };
 userAnswers = [];
 let currentQuestionIndex = 0;
+let answered = false;
+
 
 
 function startQuiz(){
     currentQuestionIndex = 0;
-    score.A = 0;
-    score.B = 0;
-    score.C = 0;
-    score.D = 0;
-    nextButton.innerHTML = "Next"
+    score = { A: 0, B: 0, C: 0, D: 0 };
+    answered = false;
+    nextButton.innerHTML = "Next";
+    nextButton.onclick = handleNext;
     showQuestion();
+
+    // score.A = 0;
+    // score.B = 0;
+    // score.C = 0;
+    // score.D = 0;
 }
 
 
@@ -188,6 +194,9 @@ function showQuestion(){
     })
 }
 */
+//
+//
+/*
 function showQuestion() {
     // clear old answers
     answerButton.innerHTML = "";
@@ -218,7 +227,35 @@ function showQuestion() {
     // Next button always visible
     nextButton.style.display = "block";
 }
+*/
 
+function showQuestion() {
+    answered = false;
+    answerButton.innerHTML = "";
+
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add("buttons");
+
+        button.addEventListener("click", () => {
+            score[answer.type]++;
+            userAnswers.push(answer.type);
+            answered = true;
+
+            // highlight choice
+            const buttons = document.querySelectorAll("#answer-btns button");
+            buttons.forEach(btn => btn.classList.remove("clicked"));
+            button.classList.add("clicked");
+        });
+
+        answerButton.appendChild(button);
+    });
+}
 
 function selectAnswer(type) {
     // add score for the selected type
@@ -227,14 +264,7 @@ function selectAnswer(type) {
     // store the answer (optional, in case you want review later)
     userAnswers.push(type);
 }
-
-let answered = false;
-
-
 nextButton.addEventListener("click", () => {
-
-
-
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
         showQuestion();
@@ -253,6 +283,34 @@ const results = {
     C: "🚀 You’re a Builder! You enjoy starting projects from scratch and seeing them grow into something big.",
     D: "🔧 You’re a Debugger! You’re patient and meticulous, fixing bugs until everything runs perfectly."
 };
+/*
+function showResult(){
+    let finalType = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
+    questionElement.innerHTML = "Your Developer Personality";
+    answerButton.innerHTML = results[finalType]; 
+    nextButton.innerHTML = "Play Again";
+    nextButton.style.display = "block";
+    nextButton.addEventListener("click", startQuiz);
+}
+*/
+
+function showResult() {
+    let finalType = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
+
+    questionElement.innerHTML = "Your Developer Personality";
+    answerButton.innerHTML = results[finalType]; 
+
+    nextButton.innerHTML = "Play Again";
+    nextButton.onclick = startQuiz; // replace old handler
+}
+
+
+
+
+
+
+
+
 
 
 // function showResult() {
@@ -272,24 +330,8 @@ const results = {
 
 // }
 
-function showResult(){
-    let finalType = Object.keys(score).reduce((a, b) => score[a] > score[b] ? a : b);
-    questionElement.innerHTML = "Your Developer Personality";
-    answerButton.innerHTML = results[finalType]; 
-    nextButton.innerHTML = "Play Again";
-    nextButton.style.display = "block";
-    nextButton.addEventListener("click", startQuiz);
-}
-
-
-
-
 
 //score[type]++
-
-
-
-
 
 
 // let score = 0;
