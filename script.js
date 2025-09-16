@@ -141,29 +141,11 @@ const questions = [
 ];
 
 const score = {A: 0, B: 0, C: 0, D: 0},
-
 userAnswers = [];
-
-
-// let currentQuestionIndex = 0;
 let currentQuestionIndex = 0;
 
 
 function startQuiz(){
-    // currentQuestionIndex = 0;
-    //score = { A: 0, B: 0, C: 0, D: 0 };
-
-    // score.A = 0;
-    // score.B = 0;
-    // score.C = 0;
-    // score.D = 0;
-
-
-    //nextButton.innerHTML = "Next"
-
-
-    // nextButton.style.display = "none";
-
     currentQuestionIndex = 0;
     score.A = 0;
     score.B = 0;
